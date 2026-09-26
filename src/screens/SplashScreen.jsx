@@ -37,7 +37,14 @@ const Dot = ({ size = 4, opacity = 1, top, left, right, bottom }) => (
   />
 );
 
-const SplashScreen = () => {
+const SplashScreen = ({ navigation }) => {
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.replace('MainApp');
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       {/* Background Decor */}
