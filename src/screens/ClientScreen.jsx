@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   SafeAreaView,
   Platform,
 } from 'react-native';
@@ -13,11 +12,7 @@ import ClearAllIcon from '../assets/main/clear_all.svg';
 import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
 
-const TABS = ['All', 'Paid', 'Unpaid', 'Estimete', 'Overdue'];
-
-const MainScreen = () => {
-  const [activeTab, setActiveTab] = useState('All');
-
+const ClientScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -26,7 +21,7 @@ const MainScreen = () => {
           <TouchableOpacity style={styles.menuButton}>
             <ClearAllIcon width={24} height={24} fill="#000" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Invoice</Text>
+          <Text style={styles.headerTitle}>Clients</Text>
           <View style={{ width: 24 }} /> {/* Placeholder to center title */}
         </View>
 
@@ -36,45 +31,20 @@ const MainScreen = () => {
           <Vector1Icon width={2} height={20} style={styles.searchDivider} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Tap to search your cards"
+            placeholder="Tap to search your clients"
             placeholderTextColor="#B0B0B0"
           />
-        </View>
-
-        {/* Tabs */}
-        <View style={styles.tabsContainer}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {TABS.map((tab, index) => (
-              <TouchableOpacity
-                key={index}
-                style={[
-                  styles.tabButton,
-                  activeTab === tab && styles.activeTabButton,
-                ]}
-                onPress={() => setActiveTab(tab)}
-              >
-                <Text
-                  style={[
-                    styles.tabText,
-                    activeTab === tab && styles.activeTabText,
-                  ]}
-                >
-                  {tab}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
         </View>
 
         {/* Empty State / Center Content */}
         <View style={styles.centerContent}>
           {/* Lottie animation will go here later as per user request */}
-          <Text style={styles.emptyText}>No Invoice's Created Yet !</Text>
+          <Text style={styles.emptyText}>No Client's Created Yet !</Text>
         </View>
 
         {/* Floating Button */}
         <TouchableOpacity style={styles.createButton}>
-          <Text style={styles.createButtonText}>Create Invoice</Text>
+          <Text style={styles.createButtonText}>Add Client</Text>
           <Text style={styles.plusIcon}>+</Text>
         </TouchableOpacity>
       </View>
@@ -128,32 +98,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#333',
   },
-  tabsContainer: {
-    marginBottom: 30,
-  },
-  tabButton: {
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    marginRight: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  activeTabButton: {
-    backgroundColor: '#027BF9',
-  },
-  tabText: {
-    fontSize: 14,
-    color: '#333',
-    fontWeight: '500',
-  },
-  activeTabText: {
-    color: '#FFFFFF',
-  },
   centerContent: {
     flex: 1,
     alignItems: 'center',
@@ -195,4 +139,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainScreen;
+export default ClientScreen;

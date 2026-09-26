@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import SplashScreen from '../screens/SplashScreen';
 import MainScreen from '../screens/MainScreen';
+import ClientScreen from '../screens/ClientScreen';
 import PlaceholderScreen from '../screens/PlaceholderScreen';
 
 import ReceiptIcon from '../assets/main/receipt_long.svg';
@@ -45,9 +46,7 @@ const TabNavigator = () => {
       })}
     >
       <Tab.Screen name="Invoice" component={MainScreen} />
-      <Tab.Screen name="Client's">
-        {() => <PlaceholderScreen name="Client's" />}
-      </Tab.Screen>
+      <Tab.Screen name="Client's" component={ClientScreen} />
       <Tab.Screen name="Busniess">
         {() => <PlaceholderScreen name="Busniess" />}
       </Tab.Screen>
