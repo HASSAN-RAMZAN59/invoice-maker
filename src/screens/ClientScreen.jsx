@@ -7,13 +7,37 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Platform,
+  FlatList,
+  Image,
 } from 'react-native';
 import ClearAllIcon from '../assets/main/clear_all.svg';
 import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
+import { ClientContext } from '../context/ClientContext';
 
-const ClientScreen = () => {
+const ClientScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { clients } = React.useContext(ClientContext);
+
+  const filteredClients = clients.filter(c => 
+    c.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const renderClientCard = ({ item }) => (
+    <TouchableOpacity style={styles.clientCard}>
+      {item.imageUri ? (
+        <Image source={{ uri: item.imageUri }} style={styles.clientImage} />
+      ) : (
+        <View style={styles.clientImagePlaceholder}>
+          <Text style={styles.clientImageText}>{item.name.charAt(0).toUpperCase()}</Text>
+        </View>
+      )}
+      <View style={styles.clientInfo}>
+        <Text style={styles.clientName}>{item.name}</Text>
+        {item.phone ? <Text style={styles.clientPhone}>{item.phone}</Text> : null}
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -37,11 +61,24 @@ const ClientScreen = () => {
           />
         </View>
 
-        <View style={styles.centerContent}>
-          <Text style={styles.emptyText}>No Client's Created Yet !</Text>
-        </View>
+        {filteredClients.length > 0 ? (
+          <FlatList
+            data={filteredClients}
+            keyExtractor={(item) => item.id}
+            renderItem={renderClientCard}
+            contentContainerStyle={styles.listContent}
+            showsVerticalScrollIndicator={false}
+          />
+        ) : (
+          <View style={styles.centerContent}>
+            <Text style={styles.emptyText}>No Client's Created Yet !</Text>
+          </View>
+        )}
 
-        <TouchableOpacity style={styles.createButton}>
+        <TouchableOpacity 
+          style={styles.createButton}
+          onPress={() => navigation.navigate('AddClient')}
+        >
           <Text style={styles.createButtonText}>Add Client</Text>
         </TouchableOpacity>
       </View>
@@ -127,6 +164,55 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+  },
+  listContent: {
+    paddingBottom: 100,
+  },
+  clientCard: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  clientImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  clientImagePlaceholder: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#027BF9',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 15,
+  },
+  clientImageText: {
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  clientInfo: {
+    flex: 1,
+  },
+  clientName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  clientPhone: {
+    fontSize: 13,
+    color: '#777',
+    marginTop: 4,
   },
 });
 
