@@ -12,7 +12,7 @@ import ClearAllIcon from '../assets/main/clear_all.svg';
 import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
 
-const ClientScreen = () => {
+const BusinessScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -21,7 +21,7 @@ const ClientScreen = () => {
           <TouchableOpacity style={styles.menuButton}>
             <ClearAllIcon width={24} height={24} fill="#000" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Clients</Text>
+          <Text style={styles.headerTitle}>Business</Text>
           <View style={{ width: 24 }} /> {/* Placeholder to center title */}
         </View>
 
@@ -31,7 +31,7 @@ const ClientScreen = () => {
           <Vector1Icon width={2} height={20} style={styles.searchDivider} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Tap to search your clients"
+            placeholder="Tap to search your business"
             placeholderTextColor="#B0B0B0"
           />
         </View>
@@ -39,12 +39,12 @@ const ClientScreen = () => {
         {/* Empty State / Center Content */}
         <View style={styles.centerContent}>
           {/* Lottie animation will go here later as per user request */}
-          <Text style={styles.emptyText}>No Client's Created Yet !</Text>
+          <Text style={styles.emptyText}>No Business Created Yet !</Text>
         </View>
 
         {/* Floating Button */}
         <TouchableOpacity style={styles.createButton}>
-          <Text style={styles.createButtonText}>Add Client</Text>
+          <Text style={styles.createButtonText}>Add Business</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -132,4 +132,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ClientScreen;
+export default BusinessScreen;
