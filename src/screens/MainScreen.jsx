@@ -27,7 +27,8 @@ const MainScreen = () => {
             <ClearAllIcon width={24} height={24} fill="#000" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Invoice</Text>
-          <View style={{ width: 24 }} />        </View>
+          <View style={{ width: 24 }} />
+        </View>
 
         <View style={styles.searchContainer}>
           <SearchIcon width={20} height={20} fill="#B0B0B0" />

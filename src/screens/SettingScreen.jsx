@@ -32,7 +32,8 @@ const SettingScreen = () => {
             <ClearAllIcon width={24} height={24} fill="#000" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Setting</Text>
-          <View style={{ width: 24 }} />        </View>
+          <View style={{ width: 24 }} />
+        </View>
 
         <ScrollView
           showsVerticalScrollIndicator={false}
