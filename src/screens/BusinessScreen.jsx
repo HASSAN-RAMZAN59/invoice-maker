@@ -12,7 +12,7 @@ import ClearAllIcon from '../assets/main/clear_all.svg';
 import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
 
-const BusinessScreen = () => {
+const BusinessScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -37,7 +37,10 @@ const BusinessScreen = () => {
           <Text style={styles.emptyText}>No Business Created Yet !</Text>
         </View>
 
-        <TouchableOpacity style={styles.createButton}>
+        <TouchableOpacity
+          style={styles.createButton}
+          onPress={() => navigation.navigate('AddBusiness')}
+        >
           <Text style={styles.createButtonText}>Add Business</Text>
         </TouchableOpacity>
       </View>

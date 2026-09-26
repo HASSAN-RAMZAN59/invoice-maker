@@ -8,6 +8,7 @@ import MainScreen from '../screens/MainScreen';
 import ClientScreen from '../screens/ClientScreen';
 import BusinessScreen from '../screens/BusinessScreen';
 import SettingScreen from '../screens/SettingScreen';
+import AddBusinessScreen from '../screens/AddBusinessScreen';
 import PlaceholderScreen from '../screens/PlaceholderScreen';
 
 import ReceiptIcon from '../assets/main/receipt_long.svg';
@@ -61,6 +62,7 @@ const AppNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="MainApp" component={TabNavigator} />
+        <Stack.Screen name="AddBusiness" component={AddBusinessScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
