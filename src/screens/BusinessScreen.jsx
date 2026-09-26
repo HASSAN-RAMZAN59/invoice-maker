@@ -14,10 +14,15 @@ import ClearAllIcon from '../assets/main/clear_all.svg';
 import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
 import { BusinessContext } from '../context/BusinessContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 const BusinessScreen = ({ navigation }) => {
   const { businesses } = useContext(BusinessContext);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredBusinesses = businesses.filter(b => 
+    b.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const renderBusinessCard = ({ item }) => (
     <TouchableOpacity style={styles.businessCard}>
@@ -52,12 +57,14 @@ const BusinessScreen = ({ navigation }) => {
             style={styles.searchInput}
             placeholder="Tap to search your business"
             placeholderTextColor="#B0B0B0"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
           />
         </View>
 
-        {businesses.length > 0 ? (
+        {filteredBusinesses.length > 0 ? (
           <FlatList
-            data={businesses}
+            data={filteredBusinesses}
             keyExtractor={(item) => item.id}
             renderItem={renderBusinessCard}
             contentContainerStyle={styles.listContent}

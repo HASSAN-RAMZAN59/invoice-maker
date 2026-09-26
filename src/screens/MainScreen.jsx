@@ -17,6 +17,7 @@ const TABS = ['All', 'Paid', 'Unpaid', 'Estimete', 'Overdue'];
 
 const MainScreen = () => {
   const [activeTab, setActiveTab] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -35,6 +36,8 @@ const MainScreen = () => {
             style={styles.searchInput}
             placeholder="Tap to search your cards"
             placeholderTextColor="#B0B0B0"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
           />
         </View>
 

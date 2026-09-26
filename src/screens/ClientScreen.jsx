@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
 
 const ClientScreen = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -30,6 +32,8 @@ const ClientScreen = () => {
             style={styles.searchInput}
             placeholder="Tap to search your clients"
             placeholderTextColor="#B0B0B0"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
           />
         </View>
 
