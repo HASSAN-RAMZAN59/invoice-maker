@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity, ScrollView, SafeAreaView, Platform } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Switch,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+  Platform,
+} from 'react-native';
 
 import PersonPinIcon from '../assets/setting/person_pin.svg';
 import DeleteIcon from '../assets/setting/delete.svg';
@@ -18,103 +27,102 @@ const SettingScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity style={styles.menuButton}>
             <ClearAllIcon width={24} height={24} fill="#000" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Setting</Text>
-          <View style={{ width: 24 }} /> {/* Placeholder to center title */}
-        </View>
+          <View style={{ width: 24 }} />        </View>
 
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 40 }}
+        >
           <View style={styles.card}>
-          
-          <View style={styles.row}>
-            <View style={styles.rowLeft}>
-              <PersonPinIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Save Customer Contect</Text>
+            <View style={styles.row}>
+              <View style={styles.rowLeft}>
+                <PersonPinIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Save Customer Contact</Text>
+              </View>
+              <Switch
+                trackColor={{ false: '#767577', true: '#027BF9' }}
+                thumbColor={'#ffffff'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={setSaveContact}
+                value={saveContact}
+              />
             </View>
-            <Switch
-              trackColor={{ false: '#767577', true: '#027BF9' }}
-              thumbColor={'#ffffff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={setSaveContact}
-              value={saveContact}
-            />
+            <View style={styles.divider} />
+
+            <View style={styles.row}>
+              <View style={styles.rowLeft}>
+                <PersonPinIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Auto Save</Text>
+              </View>
+              <Switch
+                trackColor={{ false: '#767577', true: '#027BF9' }}
+                thumbColor={'#ffffff'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={setAutoSave}
+                value={autoSave}
+              />
+            </View>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.row}>
+              <View style={styles.rowLeft}>
+                <DeleteIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Recycle Bin</Text>
+              </View>
+              <ChevronRight width={16} height={16} fill="#6A6A74" />
+            </TouchableOpacity>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.row}>
+              <View style={styles.rowLeft}>
+                <GlobeIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Language</Text>
+              </View>
+              <ChevronRight width={16} height={16} fill="#6A6A74" />
+            </TouchableOpacity>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.row}>
+              <View style={styles.rowLeft}>
+                <MoneyIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Currency</Text>
+              </View>
+              <ChevronRight width={16} height={16} fill="#6A6A74" />
+            </TouchableOpacity>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.row}>
+              <View style={styles.rowLeft}>
+                <SecurityIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Privacy Policy</Text>
+              </View>
+              <ChevronRight width={16} height={16} fill="#6A6A74" />
+            </TouchableOpacity>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.row}>
+              <View style={styles.rowLeft}>
+                <ShareIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Share with Friends</Text>
+              </View>
+              <ChevronRight width={16} height={16} fill="#6A6A74" />
+            </TouchableOpacity>
+            <View style={styles.divider} />
+
+            <TouchableOpacity style={styles.row}>
+              <View style={styles.rowLeft}>
+                <StarIcon width={20} height={20} fill="#027BF9" />
+                <Text style={styles.rowText}>Rate Us</Text>
+              </View>
+              <ChevronRight width={16} height={16} fill="#6A6A74" />
+            </TouchableOpacity>
           </View>
-          <View style={styles.divider} />
-
-          <View style={styles.row}>
-            <View style={styles.rowLeft}>
-              <PersonPinIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Auto Save</Text>
-            </View>
-            <Switch
-              trackColor={{ false: '#767577', true: '#027BF9' }}
-              thumbColor={'#ffffff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={setAutoSave}
-              value={autoSave}
-            />
-          </View>
-          <View style={styles.divider} />
-
-          <TouchableOpacity style={styles.row}>
-            <View style={styles.rowLeft}>
-              <DeleteIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Recycle Bin</Text>
-            </View>
-            <ChevronRight width={16} height={16} fill="#6A6A74" />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-
-          <TouchableOpacity style={styles.row}>
-            <View style={styles.rowLeft}>
-              <GlobeIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Language</Text>
-            </View>
-            <ChevronRight width={16} height={16} fill="#6A6A74" />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-
-          <TouchableOpacity style={styles.row}>
-            <View style={styles.rowLeft}>
-              <MoneyIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Currency</Text>
-            </View>
-            <ChevronRight width={16} height={16} fill="#6A6A74" />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-
-          <TouchableOpacity style={styles.row}>
-            <View style={styles.rowLeft}>
-              <SecurityIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Privacy Policy</Text>
-            </View>
-            <ChevronRight width={16} height={16} fill="#6A6A74" />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-
-          <TouchableOpacity style={styles.row}>
-            <View style={styles.rowLeft}>
-              <ShareIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Share with Friends</Text>
-            </View>
-            <ChevronRight width={16} height={16} fill="#6A6A74" />
-          </TouchableOpacity>
-          <View style={styles.divider} />
-
-          <TouchableOpacity style={styles.row}>
-            <View style={styles.rowLeft}>
-              <StarIcon width={20} height={20} fill="#027BF9" />
-              <Text style={styles.rowText}>Rate Us</Text>
-            </View>
-            <ChevronRight width={16} height={16} fill="#6A6A74" />
-          </TouchableOpacity>
-
-        </View>
-      </ScrollView>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

@@ -29,7 +29,7 @@ const TabNavigator = () => {
           else if (route.name === "Client's") Icon = GroupIcon;
           else if (route.name === 'Busniess') Icon = WorkIcon;
           else if (route.name === 'Setting') Icon = SettingsIcon;
-          
+
           return <Icon width={24} height={24} fill={color} color={color} />;
         },
         tabBarActiveTintColor: '#027BF9',

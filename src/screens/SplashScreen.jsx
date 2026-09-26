@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  Dimensions,
+} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import InvoiceIcon from '../assets/splash/Group 1000007156.svg';
 
@@ -48,12 +54,37 @@ const SplashScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Background Decor */}
-      <Sparkle size={30} top={height * 0.05} left={width * 0.15} opacity={0.6} />
-      <Sparkle size={25} top={height * 0.12} right={width * 0.1} opacity={0.7} />
-      <Sparkle size={15} top={height * 0.15} left={width * 0.35} opacity={0.5} />
-      <Sparkle size={25} bottom={height * 0.4} right={width * 0.1} opacity={0.4} />
-      <Sparkle size={18} bottom={height * 0.6} left={width * 0.08} opacity={0.6} />
-      
+      <Sparkle
+        size={30}
+        top={height * 0.05}
+        left={width * 0.15}
+        opacity={0.6}
+      />
+      <Sparkle
+        size={25}
+        top={height * 0.12}
+        right={width * 0.1}
+        opacity={0.7}
+      />
+      <Sparkle
+        size={15}
+        top={height * 0.15}
+        left={width * 0.35}
+        opacity={0.5}
+      />
+      <Sparkle
+        size={25}
+        bottom={height * 0.4}
+        right={width * 0.1}
+        opacity={0.4}
+      />
+      <Sparkle
+        size={18}
+        bottom={height * 0.6}
+        left={width * 0.08}
+        opacity={0.6}
+      />
+
       <Dot size={4} top={height * 0.08} left={width * 0.5} opacity={0.5} />
       <Dot size={5} top={height * 0.25} right={width * 0.25} opacity={0.4} />
       <Dot size={4} bottom={height * 0.45} right={width * 0.05} opacity={0.6} />

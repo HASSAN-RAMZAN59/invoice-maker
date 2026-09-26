@@ -21,16 +21,13 @@ const MainScreen = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity style={styles.menuButton}>
             <ClearAllIcon width={24} height={24} fill="#000" />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Invoice</Text>
-          <View style={{ width: 24 }} /> {/* Placeholder to center title */}
-        </View>
+          <View style={{ width: 24 }} />        </View>
 
-        {/* Search Bar */}
         <View style={styles.searchContainer}>
           <SearchIcon width={20} height={20} fill="#B0B0B0" />
           <Vector1Icon width={2} height={20} style={styles.searchDivider} />
@@ -41,7 +38,6 @@ const MainScreen = () => {
           />
         </View>
 
-        {/* Tabs */}
         <View style={styles.tabsContainer}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {TABS.map((tab, index) => (
@@ -66,13 +62,10 @@ const MainScreen = () => {
           </ScrollView>
         </View>
 
-        {/* Empty State / Center Content */}
         <View style={styles.centerContent}>
-          {/* Lottie animation will go here later as per user request */}
           <Text style={styles.emptyText}>No Invoice's Created Yet !</Text>
         </View>
 
-        {/* Floating Button */}
         <TouchableOpacity style={styles.createButton}>
           <Text style={styles.createButtonText}>Create Invoice</Text>
           <Text style={styles.plusIcon}>+</Text>
