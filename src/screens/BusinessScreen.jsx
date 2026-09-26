@@ -7,12 +7,34 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Platform,
+  FlatList,
+  Image,
 } from 'react-native';
 import ClearAllIcon from '../assets/main/clear_all.svg';
 import SearchIcon from '../assets/main/search.svg';
 import Vector1Icon from '../assets/main/Vector 1.svg';
+import { BusinessContext } from '../context/BusinessContext';
+import { useContext } from 'react';
 
 const BusinessScreen = ({ navigation }) => {
+  const { businesses } = useContext(BusinessContext);
+
+  const renderBusinessCard = ({ item }) => (
+    <TouchableOpacity style={styles.businessCard}>
+      {item.logoUri ? (
+        <Image source={{ uri: item.logoUri }} style={styles.businessLogo} />
+      ) : (
+        <View style={styles.businessLogoPlaceholder}>
+          <Text style={styles.businessLogoText}>{item.name.charAt(0).toUpperCase()}</Text>
+        </View>
+      )}
+      <View style={styles.businessInfo}>
+        <Text style={styles.businessName}>{item.name}</Text>
+        {item.category ? <Text style={styles.businessCategory}>{item.category}</Text> : null}
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -33,9 +55,19 @@ const BusinessScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={styles.centerContent}>
-          <Text style={styles.emptyText}>No Business Created Yet !</Text>
-        </View>
+        {businesses.length > 0 ? (
+          <FlatList
+            data={businesses}
+            keyExtractor={(item) => item.id}
+            renderItem={renderBusinessCard}
+            contentContainerStyle={styles.listContent}
+            showsVerticalScrollIndicator={false}
+          />
+        ) : (
+          <View style={styles.centerContent}>
+            <Text style={styles.emptyText}>No Business Created Yet !</Text>
+          </View>
+        )}
 
         <TouchableOpacity
           style={styles.createButton}
@@ -126,6 +158,55 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '600',
+  },
+  listContent: {
+    paddingBottom: 100,
+  },
+  businessCard: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  businessLogo: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  businessLogoPlaceholder: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#027BF9',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 15,
+  },
+  businessLogoText: {
+    color: '#FFF',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  businessInfo: {
+    flex: 1,
+  },
+  businessName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  businessCategory: {
+    fontSize: 13,
+    color: '#777',
+    marginTop: 4,
   },
 });
 

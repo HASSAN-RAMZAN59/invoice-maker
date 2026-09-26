@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -10,16 +10,46 @@ import {
   Platform,
 } from 'react-native';
 
+import { launchImageLibrary } from 'react-native-image-picker';
 import BackArrowIcon from '../assets/add business/arrow_back_ios_new.svg';
 import AddLogoIcon from '../assets/add business/Group 1000007138.svg';
+import { BusinessContext } from '../context/BusinessContext';
+import { Image } from 'react-native';
 
 const AddBusinessScreen = ({ navigation }) => {
+  const { addBusiness } = useContext(BusinessContext);
   const [businessName, setBusinessName] = useState('');
   const [category, setCategory] = useState('');
   const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [website, setWebsite] = useState('');
+  const [logoUri, setLogoUri] = useState(null);
+
+  const handlePickImage = async () => {
+    const result = await launchImageLibrary({ mediaType: 'photo', quality: 0.8 });
+    if (!result.didCancel && result.assets && result.assets.length > 0) {
+      setLogoUri(result.assets[0].uri);
+    }
+  };
+
+  const handleSave = () => {
+    if (!businessName.trim()) {
+      alert('Please enter a business name');
+      return;
+    }
+    const newBusiness = {
+      name: businessName,
+      category,
+      address,
+      email,
+      phone,
+      website,
+      logoUri,
+    };
+    addBusiness(newBusiness);
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -42,15 +72,20 @@ const AddBusinessScreen = ({ navigation }) => {
         >
           {/* Logo Card */}
           <View style={styles.logoCard}>
-            <TouchableOpacity style={styles.logoContainer}>
+            <TouchableOpacity style={styles.logoContainer} onPress={handlePickImage}>
               <View style={styles.iconWrapper}>
-                <AddLogoIcon width={80} height={80} />
-                {/* Plus icon overlay if it's not in the SVG */}
-                <View style={styles.plusOverlay}>
-                  <Text style={styles.plusText}>+</Text>
-                </View>
+                {logoUri ? (
+                  <Image source={{ uri: logoUri }} style={{ width: 80, height: 80, borderRadius: 40 }} />
+                ) : (
+                  <AddLogoIcon width={80} height={80} />
+                )}
+                {!logoUri && (
+                  <View style={styles.plusOverlay}>
+                    <Text style={styles.plusText}>+</Text>
+                  </View>
+                )}
               </View>
-              <Text style={styles.addLogoText}>Add Logo</Text>
+              <Text style={styles.addLogoText}>{logoUri ? 'Change Logo' : 'Add Logo'}</Text>
             </TouchableOpacity>
           </View>
 
@@ -97,7 +132,7 @@ const AddBusinessScreen = ({ navigation }) => {
               <Text style={styles.label}>Contact Email</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Contect@beta.angel's"
+                placeholder="Contact@beta.angel's"
                 placeholderTextColor="#A0A0A0"
                 keyboardType="email-address"
                 value={email}
@@ -135,7 +170,7 @@ const AddBusinessScreen = ({ navigation }) => {
 
         {/* Fixed Bottom Button */}
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.doneButton} onPress={() => navigation.goBack()}>
+          <TouchableOpacity style={styles.doneButton} onPress={handleSave}>
             <Text style={styles.doneButtonText}>Done</Text>
           </TouchableOpacity>
         </View>
